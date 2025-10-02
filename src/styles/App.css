@@ -1,0 +1,247 @@
+/* --- การนำเข้าฟอนต์ --- */
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap');
+
+/* --- ROOT VARIABLES (ชุดสีและตัวแปรสไตล์ไทย) --- */
+:root {
+    --background-color: #2c2828; /* สีพื้นหลังเข้มเหมือนไม้สัก */
+    --surface-color: #413a3a; /* สีการ์ดเกม */
+    --primary-color: #ffd700; /* สีทอง */
+    --secondary-color: #c0392b; /* สีแดงชาด */
+    --text-color: #f5f5f5;
+    --text-secondary-color: #c8c8c8;
+    --border-color: rgba(255, 215, 0, 0.3); /* ขอบสีทองโปร่งแสง */
+
+    --color-red: #e74c3c;
+    --color-yellow: #f1c40f;
+    --color-green: #27ae60;
+    --color-correct: #2980b9;
+}
+
+/* --- KEYFRAMES --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- BASE STYLES --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+    background-color: var(--background-color);
+    /* เพิ่มลายพื้นหลังแบบไทยประยุกต์ */
+    background-image: 
+        radial-gradient(circle at top left, rgba(255, 215, 0, 0.05), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(192, 57, 43, 0.05), transparent 50%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#root { width: 100%; max-width: 550px; }
+
+/* --- GAME CONTAINER (เหมือนกรอบรูปปิดทอง) --- */
+.game-container {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 32px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1), 0 8px 25px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: scaleIn 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* --- HEADER --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    flex-direction: column;
+    gap: 16px;
+}
+.game-title {
+    font-family: 'Chonburi', serif;
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-weight: 400;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.header-info {
+    color: var(--text-secondary-color);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    justify-content: center;
+}
+
+/* --- INPUT & BUTTONS (ดีไซน์ปุ่มแบบไทย) --- */
+.input-container { display: flex; gap: 12px; }
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 16px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+button {
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.guess-button {
+    background: var(--primary-color);
+    color: #333;
+    border: none;
+}
+
+.reveal-answer-button {
+    background-color: transparent;
+    color: var(--text-secondary-color);
+}
+.reveal-answer-button:hover:not(:disabled) {
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+    border-color: #fff;
+}
+
+.next-word-button, .reset-button {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+}
+
+.reset-button-small {
+    background-color: transparent;
+    color: var(--text-secondary-color);
+    padding: 8px 14px;
+    font-size: 0.9rem;
+}
+.reset-button-small:hover { background-color: rgba(255,255,255,0.05); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- RESULTS LIST --- */
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 40vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+.results-list::-webkit-scrollbar { display: none; }
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: slideInUp 0.5s forwards;
+    opacity: 0;
+}
+
+.bar-container {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    height: 38px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.percentage-bar {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* สีเบญจรงค์สำหรับแถบผลลัพธ์ */
+.bar-red { background-color: var(--color-red); }
+.bar-yellow { background-color: var(--color-yellow); }
+.bar-green { background-color: var(--color-green); }
+.bar-correct { background-color: var(--color-correct); }
+
+.word-in-bar {
+    position: absolute;
+    left: 16px;
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    z-index: 2;
+    pointer-events: none;
+    font-size: 1.05rem;
+}
+
+.result-item .percentage {
+    width: 55px;
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-secondary-color);
+    font-size: 1rem;
+}
+
+/* --- MESSAGES & RELATED WORDS --- */
+.error-message, .win-message, .info-message {
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+    animation: scaleIn 0.5s ease-out;
+}
+.error-message { background-color: rgba(231, 76, 60, 0.1); border: 1px solid var(--color-red); }
+.win-message { background-color: rgba(41, 128, 185, 0.1); border: 1px solid var(--color-correct); }
+.win-message h2 { color: var(--primary-color); margin-bottom: 12px; font-size: 1.8rem; }
+.win-message p strong { font-size: 2.2rem; color: #fff; text-shadow: 0 0 10px var(--color-correct); }
+.info-message { color: var(--text-secondary-color); }
+
+.related-words-container { margin-top: 16px; text-align: center; }
+.related-words-list { list-style-type: none; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 12px; }
+.related-word-item {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    animation: slideInUp 0.5s forwards;
+    opacity: 0;
+}
+.related-word-item:hover {
+    color: var(--background-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
