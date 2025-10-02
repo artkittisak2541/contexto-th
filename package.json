@@ -2,6 +2,7 @@
   "name": "contexto-th",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://arttkittisak2541.github.io/contexto-th",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -13,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start"  
+    "dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
