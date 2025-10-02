@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/contexto-th/static/css/main.d902f823.css",
+    "main.js": "/contexto-th/static/js/main.561b0af0.js",
+    "index.html": "/contexto-th/index.html",
+    "main.d902f823.css.map": "/contexto-th/static/css/main.d902f823.css.map",
+    "main.561b0af0.js.map": "/contexto-th/static/js/main.561b0af0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d902f823.css",
+    "static/js/main.561b0af0.js"
+  ]
+}
